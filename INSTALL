@@ -1,0 +1,45 @@
+
+OOTEMPLATE INSTALLATION OVERVIEW
+
+  Quick Start
+  -----------
+
+	an example of an arborescence :
+	www
+		 |- /libs
+						 |- /ootemplate
+						 |- /others
+		 |- /models
+		 |- /views
+						 |- default.tpl
+		 |- /controllers
+						 |- default.php
+		 |- /htdocs
+						 |- index.php
+
+	
+	<?php
+	// index.php
+	
+				# Configure a path of ootemplate libs
+				ini_set ('include_path', 
+								 ini_get ('include_path').':'.dirname (__FILE__).'/../lib:');
+				
+				# Configure a settings
+				OOTemplate_Setting::$dir_html = '../views';
+				OOTemplate_Setting::$suffix   = '.tpl';
+	?>
+
+	<?php
+	// www/controllers/default.php
+	
+		 # Create a new instance of ootemplate
+		 $ootemplate = new OOTemplate ();
+		 $context    = $ootemplate->getContext ();
+
+		 # set a new var in a context of template
+		 $context->set ('var_hello', 'Hello World');
+		 
+		 # output, return a displayed contents of default.tpl
+		 echo $ootemplate->render ('default');
+	?>

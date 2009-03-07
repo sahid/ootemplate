@@ -1,0 +1,8 @@
+0.7.0: add comments of phpdoc in a project
+0.6.1: add 'else' statement in TagIf
+0.6.0: tagIf impletation with not
+0.5.0: tagFor implementation
+0.4.0: Inheritance implementation
+0.3.0: block implementation
+0.2.0: text and variable implementation
+0.1.0: init of project

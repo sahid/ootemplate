@@ -1,0 +1,27 @@
+
+				         OOtemplate Oriented Object Template
+
+  What is it?
+  -----------
+
+	OOTemplate is a template engine write in PHP5. Originally
+	inspired by Django Template most popular template engine write
+	in Python.
+	Actually this project in a developement and it is not conseilled to use
+	OOTemplate for a production mode.
+
+  Documentation
+  -------------
+
+  The documentation available of this release is included in 
+	HTML format in the doc/ directory. 
+
+  Installation
+  ------------
+
+  Please see the file called INSTALL.
+
+  Licensing
+  ---------
+
+  Please see the file called LICENSE.
