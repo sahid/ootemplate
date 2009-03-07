@@ -54,6 +54,13 @@ final class OOTemplate_Filters
 		return nl2br ($string);
 	}
 
+	public static function date ($date, $args)
+	{
+		if (!is_numeric ($date))
+			$date = strtotime ($date);
+		return strftime (implode (' ', $args), $date);
+	}
+
 	public static function ifundefined ($string, $args)
 	{
 		if (is_null ($args))
