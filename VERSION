@@ -1,3 +1,4 @@
+0.8.1: generate a documentation with phpdoc
 0.8.0: add rand statement
 0.7.0: add comments of phpdoc in a project
 0.6.1: add 'else' statement in TagIf

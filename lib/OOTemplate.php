@@ -1,8 +1,8 @@
 <?php
 /**
- * @project   : OOTemplate
- * @license   : GNU Lesser General Public License 3
- * @copyright : (c) Ferdjaoui Sahid 2009
+ * @project   OOTemplate
+ * @license   GNU Lesser General Public License 3
+ * @copyright (c) Ferdjaoui Sahid 2009
  *
  * This file is part of OOTemplate.
  * 
@@ -19,8 +19,8 @@
  * You should have received a copy of the GNU General Public License
  * along with OOTemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    : Ferdjaoui Sahid <sahid.ferdjaoui@gmail.com>
- * @package   : template
+ * @author  Ferdjaoui Sahid <sahid.ferdjaoui@gmail.com>
+ * @package template
  */
 
 

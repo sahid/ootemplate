@@ -1,8 +1,8 @@
 <?php
 /**
- * @project   : OOTemplate
- * @license   : GNU Lesser General Public License 3
- * @copyright : (c) Ferdjaoui Sahid 2009
+ * @project   OOTemplate
+ * @license   GNU Lesser General Public License 3
+ * @copyright (c) Ferdjaoui Sahid 2009
  *
  * This file is part of OOTemplate.
  * 
@@ -19,8 +19,8 @@
  * You should have received a copy of the GNU General Public License
  * along with OOTemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    : Ferdjaoui Sahid <sahid.ferdjaoui@gmail.com>
- * @package   : template
+ * @author  Ferdjaoui Sahid <sahid.ferdjaoui@gmail.com>
+ * @package template
  */
 
 
@@ -98,7 +98,7 @@ class OOTemplate_NodeBlock extends OOTemplate_Node
  * </code>
  *
  *
- * You can use an imbriqued tags.
+ * You can use this, with an imbricate tags.
  *
  * <code>
  *    <ul>
@@ -174,7 +174,7 @@ class OOTemplate_NodeFor extends OOTemplate_Node
  *  </code>
  *
  * Actually only 'not' tag is active in this statement,
- * if you need use 'and' or 'or' tags, please use an imbriqued if statement
+ * if you need use 'and' or 'or' tags, please use an imbricated if statement
  * for example :
  *
  *  <code>
@@ -246,7 +246,7 @@ class OOTemplate_NodeIf extends OOTemplate_Node
 
 
 /**
- * Return a random value in an array.
+ * Get a random value in array with RandNode
  *
  * <code>
  *  

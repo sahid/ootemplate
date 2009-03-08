@@ -1,0 +1,470 @@
+<html>
+<head>
+<title>Docs For Class OOTemplate</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">template</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                              		  [ <a href="../classtrees_template.html" class="menu">class tree: template</a> ]
+		  [ <a href="../elementindex_template.html" class="menu">index: template</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_template.html">template</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../template/_OOTemplate.php.html">		OOTemplate.php
+		</a><br>
+			<a href="../template/_OOTemplate_Context.php.html">		OOTemplate_Context.php
+		</a><br>
+			<a href="../template/_OOTemplate_Document.php.html">		OOTemplate_Document.php
+		</a><br>
+			<a href="../template/_OOTemplate_Exception.php.html">		OOTemplate_Exception.php
+		</a><br>
+			<a href="../template/_OOTemplate_Filters.php.html">		OOTemplate_Filters.php
+		</a><br>
+			<a href="../template/_OOTemplate_Node.php.html">		OOTemplate_Node.php
+		</a><br>
+			<a href="../template/_OOTemplate_Setting.php.html">		OOTemplate_Setting.php
+		</a><br>
+			<a href="../template/_OOTemplate_Token.php.html">		OOTemplate_Token.php
+		</a><br>
+			<a href="../template/_OOTemplate_Variable.php.html">		OOTemplate_Variable.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../template/OOTemplate.html">OOTemplate</a><br />
+	    		<a href="../template/OOTemplate_Context.html">OOTemplate_Context</a><br />
+	    		<a href="../template/OOTemplate_Document.html">OOTemplate_Document</a><br />
+	    		<a href="../template/OOTemplate_Exception.html">OOTemplate_Exception</a><br />
+	    		<a href="../template/OOTemplate_Filters.html">OOTemplate_Filters</a><br />
+	    		<a href="../template/OOTemplate_Node.html">OOTemplate_Node</a><br />
+	    		<a href="../template/OOTemplate_NodeBlock.html">OOTemplate_NodeBlock</a><br />
+	    		<a href="../template/OOTemplate_NodeFor.html">OOTemplate_NodeFor</a><br />
+	    		<a href="../template/OOTemplate_NodeIf.html">OOTemplate_NodeIf</a><br />
+	    		<a href="../template/OOTemplate_NodeRand.html">OOTemplate_NodeRand</a><br />
+	    		<a href="../template/OOTemplate_NodeText.html">OOTemplate_NodeText</a><br />
+	    		<a href="../template/OOTemplate_NodeVariable.html">OOTemplate_NodeVariable</a><br />
+	    		<a href="../template/OOTemplate_Setting.html">OOTemplate_Setting</a><br />
+	    		<a href="../template/OOTemplate_Token.html">OOTemplate_Token</a><br />
+	    		<a href="../template/OOTemplate_TokenBlock.html">OOTemplate_TokenBlock</a><br />
+	    		<a href="../template/OOTemplate_TokenComment.html">OOTemplate_TokenComment</a><br />
+	    		<a href="../template/OOTemplate_TokenText.html">OOTemplate_TokenText</a><br />
+	    		<a href="../template/OOTemplate_TokenVariable.html">OOTemplate_TokenVariable</a><br />
+	    		<a href="../template/OOTemplate_Variable.html">OOTemplate_Variable</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: OOTemplate</h1>
+Source Location: /OOTemplate.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">This is Oriented Object Template engine.</div><br /><br />
+
+
+
+
+
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../template/OOTemplate.html#var$_context">$_context</a></li>
+  </ul>
+</td>
+
+<td valign="top">
+<h3><a href="#class_consts">Constants</a></h3>
+<ul>
+    <li><a href="../template/OOTemplate.html#constBEGIN_BLOCK">BEGIN_BLOCK</a></li>
+    <li><a href="../template/OOTemplate.html#constBEGIN_COMMENT">BEGIN_COMMENT</a></li>
+    <li><a href="../template/OOTemplate.html#constBEGIN_VARIABLE">BEGIN_VARIABLE</a></li>
+    <li><a href="../template/OOTemplate.html#constEND_BLOCK">END_BLOCK</a></li>
+    <li><a href="../template/OOTemplate.html#constEND_COMMENT">END_COMMENT</a></li>
+    <li><a href="../template/OOTemplate.html#constEND_VARIABLE">END_VARIABLE</a></li>
+  </ul>
+</td>
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../template/OOTemplate.html#method__construct">__construct</a></li>
+    <li><a href="../template/OOTemplate.html#methodgetattr">getattr</a></li>
+    <li><a href="../template/OOTemplate.html#methodgetContext">getContext</a></li>
+    <li><a href="../template/OOTemplate.html#methodrender">render</a></li>
+    <li><a href="../template/OOTemplate.html#methodsetContext">setContext</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 65]<br />
+This is Oriented Object Template engine.<br /><br /><p>How it works:  ...</p><p>Usage:  First you should create a new instance of OOTemplate class,  this object contein a OOTemplate_Context object, you will set</p><p>Sample code:</p><p><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line">&nbsp;<a href="http://www.php.net/ini_set">ini_set</a>&nbsp;<span class="src-sym">(</span><span class="src-str">'include_path'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<a href="http://www.php.net/ini_get">ini_get</a>&nbsp;<span class="src-sym">(</span><span class="src-str">'include_path'</span><span class="src-sym">)</span>.<span class="src-str">':'</span>.<a href="http://www.php.net/dirname">dirname</a>&nbsp;<span class="src-sym">(</span>__FILE__<span class="src-sym">)</span>.<span class="src-str">'/../lib:'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;require&nbsp;<span class="src-str">'OOTemplate.php'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$t&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../template/OOTemplate.html">OOTemplate</a>&nbsp;</span><span class="src-sym">(</span><span class="src-str">'&lt;html&gt;Hello&nbsp;{%&nbsp;if&nbsp;who&nbsp;%}&nbsp;{{&nbsp;who&nbsp;}}&nbsp;{%&nbsp;endif&nbsp;%}&lt;/html&gt;'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$t</span><span class="src-sym">-&gt;</span><a href="../template/OOTemplate.html#methodrender">render</a>&nbsp;<span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;output:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;&lt;html&gt;Hello&nbsp;&lt;/html&gt;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$c&nbsp;</span>=&nbsp;<span class="src-var">$t</span><span class="src-sym">-&gt;</span><a href="../template/OOTemplate.html#methodgetContext">getContext</a>&nbsp;<span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$c</span><span class="src-sym">-&gt;</span><span class="src-id">who&nbsp;</span>=&nbsp;<span class="src-str">'World'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$t</span><span class="src-sym">-&gt;</span><a href="../template/OOTemplate.html#methodrender">render</a>&nbsp;<span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;output:</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+</ol></p><br /></div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$_context"></a>
+	<p></p>
+	<h4>$_context = <span class="value"></span></h4>
+	<p>[line 114]</p>
+  Context object, for this template's instance<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td><a href="../template/OOTemplate_Context.html">OOTemplate_Context</a></td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+  <hr />
+	<a name="methodgetattr"></a>
+	<h3>static method getattr <span class="smalllinenumber">[line 176]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>static void getattr(
+
+$property, mixed
+$object, string
+$property,)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Is used to fetch an attribute from an object,  take an exception is $property is not in $object.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$property,</b>&nbsp;&nbsp;</td>
+        <td>an identifier attribute</td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$property</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 119]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>OOTemplate __construct(
+[
+$template_file = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Constructor set up $_context<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$template_file</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetContext"></a>
+	<h3>method getContext <span class="smalllinenumber">[line 141]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../template/OOTemplate_Context.html">OOTemplate_Context</a> getContext(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Return a context's template<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><a href="../template/OOTemplate.html#var$_context">$_context</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender"></a>
+	<h3>method render <span class="smalllinenumber">[line 152]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string render(
+[
+$template_file = null], string
+$template_file,)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Execute and return the template result<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>an evaluate contents of template</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$template_file,</b>&nbsp;&nbsp;</td>
+        <td>the template file or null if alredy defined</td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$template_file</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetContext"></a>
+	<h3>method setContext <span class="smalllinenumber">[line 131]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../template/OOTemplate_Context.html">OOTemplate_Context</a> setContext(
+<a href="../template/OOTemplate_Context.html">OOTemplate_Context</a>
+$context, iterable|string
+$var_name,, iterable|string
+$value,)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set a values in context's template<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>OOTemplate_Context::set</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">iterable|string&nbsp;&nbsp;</td>
+        <td><b>$var_name,</b>&nbsp;&nbsp;</td>
+        <td>the template variable name(s)</td>
+      </tr>
+          <tr>
+        <td class="type">iterable|string&nbsp;&nbsp;</td>
+        <td><b>$value,</b>&nbsp;&nbsp;</td>
+        <td>the value of $var_name</td>
+      </tr>
+          <tr>
+        <td class="type"><a href="../template/OOTemplate_Context.html">OOTemplate_Context</a>&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+<hr />
+<a name="class_constss"></a>
+<h3>Class Constants</h3>
+<div class="tags">
+	<a name="constBEGIN_BLOCK"></a>
+	<p></p>
+	<h4>BEGIN_BLOCK = <span class="value">&nbsp;'{%'</span></h4>
+	<p>[line 72]</p>
+  The left delimiter used for the template tags.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constBEGIN_COMMENT"></a>
+	<p></p>
+	<h4>BEGIN_COMMENT = <span class="value">&nbsp;'{#'</span></h4>
+	<p>[line 100]</p>
+  The left delimiter used for the template comments.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constBEGIN_VARIABLE"></a>
+	<p></p>
+	<h4>BEGIN_VARIABLE = <span class="value">&nbsp;'{{'</span></h4>
+	<p>[line 86]</p>
+  The left delimiter used for the template variables.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constEND_BLOCK"></a>
+	<p></p>
+	<h4>END_BLOCK = <span class="value">&nbsp;'%}'</span></h4>
+	<p>[line 79]</p>
+  The right delimiter used for the template tags.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constEND_COMMENT"></a>
+	<p></p>
+	<h4>END_COMMENT = <span class="value">&nbsp;'#}'</span></h4>
+	<p>[line 107]</p>
+  The right delimiter used for the template comments.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constEND_VARIABLE"></a>
+	<p></p>
+	<h4>END_VARIABLE = <span class="value">&nbsp;'}}'</span></h4>
+	<p>[line 93]</p>
+  The right delimiter used for the template variables.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Sun, 08 Mar 2009 12:56:01 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.2</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
