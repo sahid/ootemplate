@@ -184,3 +184,47 @@ class OOTemplate_NodeIf extends OOTemplate_Node
 		return $result;
 	}
 }
+
+
+class OOTemplate_NodeRand extends OOTemplate_Node
+{
+	public static function prepare (OOTemplate_Token $token, $dom = null)
+	{
+		return new OOTemplate_NodeRand ($token, $dom->parse (array ('endrand')));
+	}
+	
+	public function __construct (OOTemplate_Token $token, array $nodes)
+	{
+		$this->_nodes = $nodes;
+		$this->_token = $token;
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		$result = "";
+		$bits = $this->_token->split ();
+		if (sizeof ($bits) != 4)
+			throw new OOTemplate_Exception (sprintf ("'rand' statements should use the format : 'rand var in array' : %s",
+																							 $this->_token->contents ()));
+		list (, $var,, $arr) = $bits;
+		if (!$context->has_key ($arr))
+			throw new OOTemplate_Exception (sprintf ("'rand' tag received an invalid argument : %s",
+																							 $this->_token->contents ()));
+		$current = clone $context;
+		try {
+			$current->$var = $current->$arr->shuffle ()->current ();
+			foreach ($this->_nodes as $node)
+				$result.= $node->render ($current);
+		} 
+		catch (OOTemplate_Exception $e)
+			{	}
+		return $result;
+
+		foreach ($this->_if_nodes as $node)
+			$result.= $node->render ($context);
+
+		return $result;
+	}
+}
+
+

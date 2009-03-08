@@ -97,6 +97,12 @@ final class OOTemplate_Context  implements Iterator
 		return $this->get ($key) ? true : false;
 	}
 
+	public function shuffle ()
+	{
+		shuffle ($this->_dicts);
+		return $this;
+	}
+
 	
 	/** iterable */
 	public function rewind () {	reset ($this->_dicts); }
