@@ -86,6 +86,36 @@ class OOTemplate_NodeBlock extends OOTemplate_Node
 }
 
 
+/**
+ * Loops over each item in an array.
+ *
+ * <code>
+ *    <ul>
+ *    {% for item in list %}
+ *      <li>{{ item }</li>
+ *    {% endfor %}
+ *    </ul>
+ * </code>
+ *
+ *
+ * You can use an imbriqued tags.
+ *
+ * <code>
+ *    <ul>
+ *    {% for item in list %}
+ *      <li>{{ item }</li>
+ *      {% if item.ss_items %}
+ *      <ul>
+ *        {% for ss_item in item.ss_items %}
+ *          <li>{{ ss_item }</li>
+ *        {% endfor %}
+ *      </ul>
+ *      {% endif %}
+ *    {% endfor %}
+ *    </ul>
+ * </code>
+ *
+ */
 class OOTemplate_NodeFor extends OOTemplate_Node
 {
 	public static function prepare (OOTemplate_Token $token, $dom = null)
@@ -106,12 +136,13 @@ class OOTemplate_NodeFor extends OOTemplate_Node
 		if (is_null ($o) || is_null ($var))
 			throw new OOTemplate_Exception (sprintf ("'for' statements should use the format : 'for x in y' : %s",
 																							 $this->_token->contents ()));
+
+		if (!$context->has_key ($var))
+			throw new OOTemplate_Exception (sprintf ("'for' tag received an invalid argument : %s",
+																							 $this->_token->contents ()));
 		
 		try {
 			$current = new OOTemplate_Context ();
-			if (!$context->has_key ($var))
-				throw new OOTemplate_Exception (sprintf ("'for' tag received an invalid argument : %s",
-																								 $this->_token->contents ()));
 			foreach ($context->$var as $each)
 				{
 					$current->set ($o, $each);
@@ -128,7 +159,35 @@ class OOTemplate_NodeFor extends OOTemplate_Node
 }
 
 
-
+/**
+ * Evaluate a variable, if that variable is "true", execute
+ * a contents of the block or a else block.
+ *
+ *  <code>
+ *
+ *     {% if user %}
+ *       <b>Hello {{ user.name | ucfist }}</b>
+ *     {% else %}
+ *       <b>Hello Guest</b>
+ *     {% endif %}
+ *
+ *  </code>
+ *
+ * Actually only 'not' tag is active in this statement,
+ * if you need use 'and' or 'or' tags, please use an imbriqued if statement
+ * for example :
+ *
+ *  <code>
+ *
+ *     {% if user %}
+ *       {% if is_admin %} 
+ *         {{ user.name }} is an admin.
+ *       {% endif %}
+ *     {% endif %}
+ *
+ *  </code>
+ *
+ */
 class OOTemplate_NodeIf extends OOTemplate_Node
 {
 	public static function prepare (OOTemplate_Token $token, $dom = null)
@@ -186,6 +245,19 @@ class OOTemplate_NodeIf extends OOTemplate_Node
 }
 
 
+/**
+ * Return a random value in an array.
+ *
+ * <code>
+ *  
+ *  {% rand tip in tips %}
+ *    <h1>Tips of days</h1>
+ *    <h2>{{ tip.title }}<h2/>
+ *    <p>{{ tip.contents }}<p/>
+ *  {% endrand %}
+ *
+ * </code>
+ */
 class OOTemplate_NodeRand extends OOTemplate_Node
 {
 	public static function prepare (OOTemplate_Token $token, $dom = null)
