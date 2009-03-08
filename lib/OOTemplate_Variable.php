@@ -47,7 +47,7 @@ class OOTemplate_Variable
 	{
 		@list ($this->_variable, $this->_filters) = explode ('|', $variable, 2);
 		$this->_variable = trim ($this->_variable);		
-		$this->_filters  = strtolower (trim ($this->_filters));
+		$this->_filters  = trim ($this->_filters);
 	}
 	
 	public function resolve (OOTemplate_Context $context)
