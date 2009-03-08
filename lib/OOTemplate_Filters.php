@@ -61,6 +61,26 @@ final class OOTemplate_Filters
 		return strftime (implode (' ', $args), $date);
 	}
 
+
+	/**
+	 * Wraps a string to a given number of characters
+	 *
+	 * <code>
+	 * $c->my_text = abcdef;
+	 * {{ my_text | wrap 3 ... }}
+	 * // output : abc...
+	 * </code>
+	 */
+	public static function wrap ($string, $args)
+	{
+		$limit = isset ($args[0]) ? (int) $args[0]    : 20;
+		$break = isset ($args[1]) ? (string) $args[1] : '';
+		
+		if (strlen ($string) > $limit)
+			return substr ($string, 0, $limit).$break;
+		return $string;
+	}
+
 	public static function ifundefined ($string, $args)
 	{
 		if (is_null ($args))
