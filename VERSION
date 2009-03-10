@@ -1,3 +1,4 @@
+0.8.2: clean a context class and variable, and resolved a bug in NodeIf
 0.8.1: generate a documentation with phpdoc
 0.8.0: add rand statement
 0.7.0: add comments of phpdoc in a project

@@ -210,26 +210,31 @@ class OOTemplate_NodeIf extends OOTemplate_Node
 	
 	public function render (OOTemplate_Context $context)
 	{
-
 		$bits = $this->_token->split ();
+
 		unset ($bits[0]);
 		$result = "";
+
 		$not = false;
+
 		foreach ($bits as $bit)
-			{
-				switch ($bit)
-					{
-					case 'not':	$not = true;	continue;
-					}
+			{					
+				if ($bit == 'not') {
+					$not = !$not;
+					continue;
+
+				}
+
 				try	{
-					OOTemplate::getattr ($bit, $context);
-					$parse = (bool) !$not;
+					if (($var_exists = $context->get ($bit, null)) === null)
+						throw new OOTemplate_Exception ();
+					$parse = !empty ($var_exists) && !$not;
 				}
 				catch (OOTemplate_Exception $e)	{
 					$parse = (bool) $not;
 				}
 			}
-
+		
 		if ($parse)
 			{
 				foreach ($this->_if_nodes as $node)
@@ -240,6 +245,7 @@ class OOTemplate_NodeIf extends OOTemplate_Node
 				foreach ($this->_el_nodes as $node)
 					$result.= $node->render ($context);
 			}
+
 		return $result;
 	}
 }
@@ -278,13 +284,17 @@ class OOTemplate_NodeRand extends OOTemplate_Node
 		if (sizeof ($bits) != 4)
 			throw new OOTemplate_Exception (sprintf ("'rand' statements should use the format : 'rand var in array' : %s",
 																							 $this->_token->contents ()));
-		list (, $var,, $arr) = $bits;
-		if (!$context->has_key ($arr))
+		list (, $var,, $key) = $bits;
+
+		$data = $context->get ($key, null);
+		if (is_null ($data) || !($data instanceof Traversable))
 			throw new OOTemplate_Exception (sprintf ("'rand' tag received an invalid argument : %s",
 																							 $this->_token->contents ()));
 		$current = clone $context;
 		try {
-			$current->$var = $current->$arr->shuffle ()->current ();
+			$data = (array) $data->getDicts ();;
+			shuffle ($data);
+			$current->set ($var, current ($data));
 			foreach ($this->_nodes as $node)
 				$result.= $node->render ($current);
 		} 

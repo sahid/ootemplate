@@ -53,17 +53,18 @@ class OOTemplate_Variable
 	public function resolve (OOTemplate_Context $context)
 	{
 		$resolved = clone $context;
-		
-		foreach (explode ('.', $this->_variable) as $bit)
-			{
-				try {
-					$resolved = OOTemplate::getattr ($bit, $resolved);
+		try {		
+			foreach (explode ('.', $this->_variable) as $bit)
+				{
+					if (!($resolved instanceof OOTemplate_Context))
+						throw new OOTemplate_Exception (vspintf ("Varriable is invalid : %s", $this->_variable));
+					$resolved = $resolved->get ($bit, OOTemplate_Setting::$string_ifnot_defined);
 				}
-				catch (OOtemplate_Exception $e)	{
-					return OOTemplate_Setting::$string_ifnot_defined;
-				}
-			}
-		
+		} 
+		catch (OOTemplate_Exception $e) {
+
+			return $e->getMessage ();
+		}
 		if ($context->autoescape)
 			$resolved = htmlspecialchars (stripslashes ($resolved), 
 																		ENT_COMPAT, OOTemplate_Setting::$charset);

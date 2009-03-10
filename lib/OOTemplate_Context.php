@@ -27,29 +27,24 @@
 final class OOTemplate_Context  implements Iterator
 {
 	protected $_dicts;
+
 	public $autoescape;
 
-	public function __construct ($data = null, $autoescape = null)
+	public function __construct ($data = array (), $autoescape = null)
 	{	
-		$this->_dicts      = $data ? self::toContext ($data) : array ();
-
+		
 		$this->autoescape = OOTemplate_Setting::$autoescape;
 		if (!is_null ($autoescape))
 			$this->autoescape = (bool) $autoescape;
+		$this->_dicts = array ();
+		$this->set ($data);
+	}
+
+	public function getDicts ()
+	{
+		return $this->_dicts;
 	}
 	
-	public function push ()
-	{
-		return $this->_dicts[] = new stdClass ();
-	}
-
-	public function pop () 
-	{
-		if (sizeof ($this->_dicts) == 1)
-			throw new OOTemplate_Exception ("pop () has been called more times than push ()");
-		return array_pop ($this->_dicts);
-	}
-
 	public function __set ($key, $value)
 	{
 		$this->set ($key, $value);
@@ -68,23 +63,18 @@ final class OOTemplate_Context  implements Iterator
 					$this->set ($k, $v);
 			}
 		else
-			$this->_dicts[$key] = self::toContext ($value);
+			$this->_dicts[$key] = $this->_toContext ($value);
 		
 		return $this;
 	}
 
-	public static function toContext ($data)
+	private function _toContext ($data)
 	{
 		if (is_array ($data) || is_object ($data))
-			{
-				$c = new OOTemplate_Context ();
-				foreach ($data as $k => $v)
-					$c->set ($k, $v);
-				return $c;
-			}
+			return new OOTemplate_Context ($data, $this->autoescape);
 		return $data;
 	}
-	
+
 	public function get ($key, $default = null)
 	{
 		if (array_key_exists ($key, $this->_dicts))
@@ -96,13 +86,6 @@ final class OOTemplate_Context  implements Iterator
 	{
 		return $this->get ($key) ? true : false;
 	}
-
-	public function shuffle ()
-	{
-		shuffle ($this->_dicts);
-		return $this;
-	}
-
 	
 	/** iterable */
 	public function rewind () {	reset ($this->_dicts); }
