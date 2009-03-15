@@ -59,6 +59,8 @@ class OOTemplate_Document
 			throw new OOTemplate_Exception ("template {$file}, not found in {$fullpath}\n");
 		
 		$this->_contents = file_get_contents ($fullpath);
+		if (!OOTemplate_Setting::isUTF8 ($this->_contents))
+			throw new OOTemplate_Exception ("Templates can only be constructed from unicode or UTF-8 strings.");
 		
 		$this->_tokenize ();
 	}

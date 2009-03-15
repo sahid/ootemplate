@@ -25,6 +25,7 @@
 
 
 require_once ('OOTemplate_Exception.php');
+require_once ('OOTemplate_Debug.php');
 require_once ('OOTemplate_Variable.php');
 require_once ('OOTemplate_Context.php');
 require_once ('OOTemplate_Filters.php');
@@ -133,27 +134,29 @@ class OOTemplate_NodeFor extends OOTemplate_Node
 	{
 		$result = "";
 		list (,$o,,$var) = $this->_token->split ();
-		if (is_null ($o) || is_null ($var))
-			throw new OOTemplate_Exception (sprintf ("'for' statements should use the format : 'for x in y' : %s",
-																							 $this->_token->contents ()));
 
-		if (!$context->has_key ($var))
-			throw new OOTemplate_Exception (sprintf ("'for' tag received an invalid argument : %s",
-																							 $this->_token->contents ()));
-		
 		try {
-			$current = new OOTemplate_Context ();
-			foreach ($context->$var as $each)
+			if (is_null ($o) || is_null ($var))
+				throw new OOTemplate_Exception (sprintf ("'for' statements should use the format : 'for x in y' : %s",
+																								 $this->_token->contents ()));
+			
+			if (!$context->has_key ($var))
+				throw new OOTemplate_Exception (sprintf ("'for' tag received an invalid argument : %s",
+																								 $this->_token->contents ()));
+
+			$current = clone $context;
+			foreach ($context->get ($var) as $each)
 				{
-					$current->set ($o, $each);
+					$current->set ($o, $each->getDicts ());
 					foreach ($this->_nodes as $node)
 						{
 							$result.= $node->render ($current);
 						}
 				}
 		} 
-		catch (OOTemplate_Exception $e)
-			{	}
+		catch (OOTemplate_Exception $e)	{
+			OOTemplate_Debug::show ($e->getMessage ());
+		}
 		return $result;
 	}
 }

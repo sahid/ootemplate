@@ -57,7 +57,7 @@ class OOTemplate_Variable
 			foreach (explode ('.', $this->_variable) as $bit)
 				{
 					if (!($resolved instanceof OOTemplate_Context))
-						throw new OOTemplate_Exception (vspintf ("Varriable is invalid : %s", $this->_variable));
+						throw new OOTemplate_Exception (sprintf ("Varriable is invalid : %s", $this->_variable));
 					$resolved = $resolved->get ($bit, OOTemplate_Setting::$string_ifnot_defined);
 				}
 		} 
@@ -67,12 +67,12 @@ class OOTemplate_Variable
 		}
 		if ($context->autoescape)
 			$resolved = htmlspecialchars (stripslashes ($resolved), 
-																		ENT_COMPAT, OOTemplate_Setting::$charset);
-		
+																		ENT_COMPAT, 'UTF-8');
+
 		foreach (explode ('|', $this->_filters) as $filter)
 			if (!empty ($filter))
 				{
-					@list ($filter, $args) = explode (' ', $filter, 2);
+					@list ($filter, $args) = explode (' ', trim ($filter), 2);
 					if (method_exists ('OOTemplate_Filters', $filter))
 						$resolved = OOTemplate_Filters::$filter ($resolved, explode (' ', $args));
 				}

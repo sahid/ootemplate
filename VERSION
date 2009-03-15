@@ -1,3 +1,4 @@
+0.8.3: stabilization and corrects bugs
 0.8.2: clean a context class and variable, and resolved a bug in NodeIf
 0.8.1: generate a documentation with phpdoc
 0.8.0: add rand statement
