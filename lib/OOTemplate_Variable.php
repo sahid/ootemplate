@@ -25,9 +25,10 @@
 
 
 require_once ('OOTemplate_Exception.php');
+require_once ('OOTemplate_Debug.php');
 require_once ('OOTemplate_Setting.php');
 require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_Filters.php');
+
 
 
 class OOTemplate_Variable
@@ -43,13 +44,11 @@ class OOTemplate_Variable
 	 * $v.resolve ($context);
 	 * >>> News
 	 */
-	public function __construct ($variable)
+	public function __construct ($varname)
 	{
-		@list ($this->_variable, $this->_filters) = explode ('|', $variable, 2);
-		$this->_variable = trim ($this->_variable);		
-		$this->_filters  = trim ($this->_filters);
+		$this->_variable = trim ($varname);		
 	}
-	
+
 	public function resolve (OOTemplate_Context $context)
 	{
 		$resolved = clone $context;
@@ -57,25 +56,13 @@ class OOTemplate_Variable
 			foreach (explode ('.', $this->_variable) as $bit)
 				{
 					if (!($resolved instanceof OOTemplate_Context))
-						throw new OOTemplate_Exception (sprintf ("Varriable is invalid : %s", $this->_variable));
+						throw new OOTemplate_Exception (sprintf ("Variable is invalid : %s", $this->_variable));
 					$resolved = $resolved->get ($bit, OOTemplate_Setting::$string_ifnot_defined);
 				}
 		} 
 		catch (OOTemplate_Exception $e) {
-
-			return $e->getMessage ();
+			OOTemplate_Debug::show ($e->getMessage ());
 		}
-		if ($context->autoescape)
-			$resolved = htmlspecialchars (stripslashes ($resolved), 
-																		ENT_COMPAT, 'UTF-8');
-
-		foreach (explode ('|', $this->_filters) as $filter)
-			if (!empty ($filter))
-				{
-					@list ($filter, $args) = explode (' ', trim ($filter), 2);
-					if (method_exists ('OOTemplate_Filters', $filter))
-						$resolved = OOTemplate_Filters::$filter ($resolved, explode (' ', $args));
-				}
 		return $resolved;
 	}
 

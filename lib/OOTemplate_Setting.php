@@ -26,17 +26,17 @@
 
 class OOTemplate_Setting
 {
-	public static $dir_html = './';
+	public static $dir_html = '.';
 	public static $suffix   = '.html';
 
-	public static $string_ifnot_defined = 'TEMPLATE VAR IS NOT DEFINED';
+	public static $string_ifnot_defined = '';
 	public static $debug      = true;
 	
 	public static $autoescape = true;
 	
 	public static function generate_path ($template_file)
 	{
-		return self::$dir_html.$template_file.self::$suffix;
+		return rtrim (self::$dir_html, '/\\ ').'/'.$template_file.self::$suffix;
 	}
 
 	public static function isUTF8 ($str)

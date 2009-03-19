@@ -25,41 +25,59 @@
  
 
 require_once ('OOTemplate_Exception.php');
+require_once ('OOTemplate_FiltersAdapter.php');
 
 
-final class OOTemplate_Filters
+class upper extends OOTemplate_FiltersAdapter 
 {
-	public static function upper ($string)
+	public function resolve ($string)
 	{
 		return strtoupper ($string);
 	}
+}
 
-	public static function ucfirst ($string)
+class ucfirst extends OOTemplate_FiltersAdapter 	
+{
+	public function resolve ($string)
 	{
 		return ucfirst ($string);
 	}
+}
 
-	public static function lower ($string)
+class lower extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($string)
 	{
 		return strtolower ($string);
 	}
+}
 
-	public static function escape ($string)
+class escape extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($string)
 	{
 		return htmlentities ($string, ENT_QUOTES, 'UTF-8');
 	}
+}
 
-	public static function nl2br ($string)
+class nl2br extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($string)
 	{
 		return nl2br ($string);
 	}
+}
 
-	public static function date ($date, $args)
+class date extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($date, $args)
 	{
 		if (!is_numeric ($date))
 			$date = strtotime ($date);
 		return strftime (implode (' ', $args), $date);
 	}
+}
+
 
 
 	/**
@@ -71,7 +89,9 @@ final class OOTemplate_Filters
 	 * // output : abc...
 	 * </code>
 	 */
-	public static function wrap ($string, $args)
+class wrap extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($string, $args)
 	{
 		$limit = isset ($args[0]) ? (int) $args[0]    : 20;
 		$break = isset ($args[1]) ? (string) $args[1] : '';
@@ -80,12 +100,15 @@ final class OOTemplate_Filters
 			return substr ($string, 0, $limit).$break;
 		return $string;
 	}
+}
 
-	public static function ifundefined ($string, $args)
+class default extends OOTemplate_FiltersAdapter 
+{
+	public function resolve ($string, $args)
 	{
 		if (is_null ($args))
 			throw new OOTemplate_Exception ("Missing argument 2 for ifundefined filter\n");
-
+		
 		if (empty ($string))
 			return $args[0];
 		return $string;

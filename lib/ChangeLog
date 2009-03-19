@@ -2,6 +2,28 @@
 
 2009-03-18  Sahid Ferdjaoui  <sahid.ferdjaoui@gmail.com>
 
+	* OOTemplate_Libs.php:
+	* OOTemplate_Filter.php:
+	* OOTemplate_FilterAdapter.php:
+		Added
+
+	* filters/:
+		Added, this folder have all default filters classes
+
+	* OOTemplate_Filter.php:	
+	* OOTemplate_Node.php
+	* OOTemplate_Variable.php: 
+		Separate filter process and variable process
+	
+
+	* OOTemplate_Setting.php:
+		Modify filters
+		Create Filters Adapter
+	
+	* OOTemplate_Setting.php:
+		Modify generate_path method
+		Modify a default value of $string_ifnot_defined
+	
 	* OOTemplate_Document.php:
 		Add Method setFile and setContents
 		Mod __construct method

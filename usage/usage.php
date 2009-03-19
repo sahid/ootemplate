@@ -4,7 +4,7 @@ ini_set ('include_path',
 
 require 'OOTemplate.php';
 
-$t = new OOTemplate (new OOTemplate_Document ('<html>Hello {% if who %} {{ who }} {% endif %}</html>'));
+$t = new OOTemplate (new OOTemplate_Document ('<html>Hello {% if who %} {{ who | upper }} {% endif %}</html>'));
 echo $t->render ()."\n";
 // output:
 // <html>Hello </html>
