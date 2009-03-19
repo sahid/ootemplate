@@ -63,7 +63,16 @@ class OOTemplate_Variable
 		catch (OOTemplate_Exception $e) {
 			OOTemplate_Debug::show ($e->getMessage ());
 		}
+
+		if (OOTemplate_Setting::$autoescape)
+			$resolved = $this->escape ($resolved);
+
 		return $resolved;
+	}
+
+	public function escape ($var)
+	{
+		return stripslashes (htmlentities ($var, ENT_QUOTES, 'UTF-8'));
 	}
 
 }

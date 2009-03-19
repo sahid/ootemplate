@@ -24,14 +24,10 @@
  */
  
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_FiltersAdapter.php');
-
-
-class lower extends OOTemplate_FiltersAdapter 
+class lower extends OOTemplate_FilterAdapter 
 {
-	public function resolve ($string)
+	public function resolve (OOTemplate_Context $context)
 	{
-		return strtolower ($string);
+		return strtolower ($this->_resolved);
 	}
 }

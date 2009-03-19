@@ -56,7 +56,7 @@ class OOTemplate_NodeVariable extends  OOTemplate_Node
 	{
 		$this->_token    = $token;
 		
-		list ($varname, $filters) = explode ('|', $token->contents (), 2);
+		@list ($varname, $filters) = explode ('|', $token->contents (), 2);
 		
 		$this->_variable = new OOTemplate_Variable ($varname);
 		if ($filters)

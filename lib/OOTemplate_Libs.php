@@ -27,7 +27,6 @@
 require_once ('OOTemplate_Exception.php');
 require_once ('OOTemplate_Setting.php');
 require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_IFilter.php');
 
 
 class OOTemplate_Libs 

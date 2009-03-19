@@ -31,6 +31,7 @@ require_once ('OOTemplate_Setting.php');
 require_once ('OOTemplate_Context.php');
 require_once ('OOTemplate_Libs.php');
 require_once ('OOTemplate_Variable.php');
+require_once ('OOTemplate_FilterAdapter.php');
 
 
 class OOTemplate_Filter
@@ -66,8 +67,21 @@ class OOTemplate_Filter
 				$filter = trim ($filter);
 				if (!empty ($filter))
 					{
-						@list ($filter_name, $args) = explode (':', $filter, 2);
+						@list ($filter_name, $str_args) = explode (':', $filter, 2);
 						try {
+							$args = array ();
+							foreach (explode (',', $str_args) as $arg)
+								{
+									switch (strpos ($arg, "'") || strpos ($arg, '"'))
+										{
+										case true:
+											$args[] = trim ($arg, '\'" ');
+											break;
+										case false:
+											$args[] = new OOTemplate_Variable ($arg);
+											break;
+										}
+								}
 							$resolved = OOTemplate_Libs::filter ($filter_name, 
 																									 $resolved, $args)->resolve ($context);
 						}

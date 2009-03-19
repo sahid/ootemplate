@@ -24,9 +24,6 @@
  */
  
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_FilterAdapter.php');
-
 class date extends OOTemplate_FilterAdapter 
 {
 	public function resolve (OOTemplate_Context $context)

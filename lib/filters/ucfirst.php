@@ -24,11 +24,7 @@
  */
  
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_FiltersAdapter.php');
-
-
-class ucfirst extends OOTemplate_FiltersAdapter 	
+class ucfirst extends OOTemplate_FilterAdapter 	
 {
 	public function resolve (OOTemplate_Context $context)
 	{

@@ -24,24 +24,10 @@
  */
  
 
-/**
- * Wraps a string to a given number of characters
- *
- * <code>
- * $c->my_text = abcdef;
- * {{ my_text | wrap 3 ... }}
- * // output : abc...
- * </code>
- */
-class wrap extends OOTemplate_FilterAdapter 
+class striptags extends OOTemplate_FilterAdapter 
 {
 	public function resolve (OOTemplate_Context $context)
 	{
-		$limit = isset ($this->_args[0]) ? (int) $this->_args[0]    : 20;
-		$break = isset ($this->_args[1]) ? (string) $this->_args[1] : '';
-		
-		if (strlen ($this->_resolved) > $limit)
-			return substr ($this->_resolved, 0, $limit).$break;
-		return $this->_resolved;
+		return strip_tags ($this->_resolved);
 	}
 }

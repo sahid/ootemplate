@@ -56,7 +56,6 @@ class OOTemplate_Document
 	public function __construct ($template_string = '')
 	{
 		$this->setContents ($template_string);
-		$this->tokenize ();
 	}
 
 	/**
@@ -68,6 +67,8 @@ class OOTemplate_Document
 		if (!OOTemplate_Setting::isUTF8 ($this->_contents))
 			throw new OOTemplate_Exception ("Templates can only be constructed from unicode or UTF-8 strings.");
 		$this->_contents = $contents;
+		
+		$this->tokenize ();
 		
 		return $this;
 	}
@@ -84,7 +85,7 @@ class OOTemplate_Document
 
 		$this->_file = $file;
 		$this->setContents (file_get_contents ($fullpath));
-
+		
 		return $this;
 	}
 
@@ -155,7 +156,8 @@ class OOTemplate_Document
 						switch ($node_type)
 							{
 							case 'extends':
-								$this->_parent = new OOTemplate_Document (trim ($name, '"'));
+								$this->_parent = new OOTemplate_Document ();
+								$this->_parent->setFile (trim ($name, '"'));
 								$nodes = $this->_parent->parse ();
 								break;
 							default:
@@ -186,7 +188,6 @@ class OOTemplate_Document
 	{
 		$result  = "";
 		$current = clone $this;
-		
 		foreach ($current->parse () as $node)
 			$result.= $node->render ($context);
 

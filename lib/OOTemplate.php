@@ -188,8 +188,7 @@ class OOTemplate
 			return $this->_document->render ($this->_context);
 		}
 		catch (OOTemplate_Exception $e)	{
-			if (OOTemplate_Setting::$debug)
-				echo $e->getMessage ();
+			OOTemplate_Debug::show ($e->getMessage ());
 		}
 	}
 
