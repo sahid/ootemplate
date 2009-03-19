@@ -1,0 +1,5 @@
+2009-03-18  Sahid Ferdjaoui  <sahid.ferdjaoui@gmail.com>
+
+	* lib/OOTemplate.php Modify param for OOTemplate::render ().
+	* Fresly created ChangeLog.
+

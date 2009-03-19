@@ -48,21 +48,44 @@ class OOTemplate_Document
 	 */
 	protected $_tokens;
 	
+	
 	/**
 	 * Constructor set up,
 	 * get a contents of template {@link $_contents}
 	 */
-	public function __construct ($file)
+	public function __construct ($template_string = '')
+	{
+		$this->setContents ($template_string);
+		$this->tokenize ();
+	}
+
+	/**
+	 * Set a new template contents
+	 *
+	 */
+	public function setContents ($contents)
+	{
+		if (!OOTemplate_Setting::isUTF8 ($this->_contents))
+			throw new OOTemplate_Exception ("Templates can only be constructed from unicode or UTF-8 strings.");
+		$this->_contents = $contents;
+		
+		return $this;
+	}
+
+	/**
+	 * Set a new template file
+	 *
+	 */
+	public function setFile ($file)
 	{
 		$fullpath = OOTemplate_Setting::generate_path ($file);
 		if (!file_exists ($fullpath))
 			throw new OOTemplate_Exception ("template {$file}, not found in {$fullpath}\n");
-		
-		$this->_contents = file_get_contents ($fullpath);
-		if (!OOTemplate_Setting::isUTF8 ($this->_contents))
-			throw new OOTemplate_Exception ("Templates can only be constructed from unicode or UTF-8 strings.");
-		
-		$this->_tokenize ();
+
+		$this->_file = $file;
+		$this->setContents (file_get_contents ($fullpath));
+
+		return $this;
 	}
 
 	/**
@@ -78,7 +101,7 @@ class OOTemplate_Document
 	 * This methode, split a template string in a token
 	 *
 	 */
-	protected function _tokenize ()
+	public function tokenize ()
 	{
 		$this->_tokens = array ();
 		
@@ -161,8 +184,10 @@ class OOTemplate_Document
 	 */
 	public function render (OOTemplate_Context $context)
 	{
-		$result = "";
-		foreach ($this->parse () as $node)
+		$result  = "";
+		$current = clone $this;
+		
+		foreach ($current->parse () as $node)
 			$result.= $node->render ($context);
 
 		return $result;

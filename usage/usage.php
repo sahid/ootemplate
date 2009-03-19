@@ -4,13 +4,14 @@ ini_set ('include_path',
 
 require 'OOTemplate.php';
 
-$t = new OOTemplate ('<html>Hello {% if who %} {{ who }} {% endif %}</html>');
-$t->render ();
+$t = new OOTemplate (new OOTemplate_Document ('<html>Hello {% if who %} {{ who }} {% endif %}</html>'));
+echo $t->render ()."\n";
 // output:
 // <html>Hello </html>
 
 $c = $t->getContext ();
 $c->who = 'World';
-$t->render ();
+
+echo $t->render ()."\n";
 // output:
 // <html>Hello World</html>

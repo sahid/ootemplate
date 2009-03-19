@@ -112,25 +112,55 @@ class OOTemplate
 	 * @var OOTemplate_Context
 	 */
 	protected $_context;
+
+	/**
+	 * Document object of a template's instance
+	 *
+	 * @var OOTemplate_Document
+	 */
+	protected $_document;
 	
 	/**
 	 * Constructor set up {@link $_context}
 	 */
-	public function __construct ($template_file = null)
+	public function __construct (OOTEmplate_Document $document = null, OOTemplate_Context $context = null)
 	{
-		$this->_context = new OOTemplate_Context ();
+		$this->_document = is_null ($document) ? new OOTemplate_Document () : $document;
+		$this->_context  = is_null ($context) ? new OOTemplate_Context () : $context;
 	}
 
 	/**
-	 * Set a values in context's template
+	 * Set a OOTemplate_Document Object
 	 *
-	 * @param iterable|string $var_name, the template variable name(s)
-	 * @param iterable|string $value, the value of $var_name
-	 * @return OOTemplate_Context {@link OOTemplate_Context::set ()}
+	 * @param $document, The new OOTemplate_Document object
+	 */
+	public function setDocument (OOTemplate_Document $document)
+	{
+		$this->_document = $document;
+
+		return $this;
+	}
+
+	/**
+	 * Get a OOTemplate_Document Object {@link $_document}
+	 *
+	 * @return OOTemplate_Document
+	 */
+	public function getDocument ()
+	{
+		return $this->_document;
+	}
+
+	/**
+	 * Set a new OOTemplate_Context
+	 *
+	 * @param $this
 	 */
 	public function setContext (OOTemplate_Context $context)
 	{
 		$this->_context = $context;
+		
+		return $this;
 	}
 
 	/**
@@ -151,22 +181,21 @@ class OOTemplate
 	 */
 	public function render ($template_file = null)
 	{		
-		if (is_null ($template_file))
-			$template_file = $this->_template;
 		try {
-			if (is_null ($template_file))
-				throw new OOTemplate_Exception ("You should take a template file");
-					
-			$dom = new OOTemplate_Document ($template_file);
-			return $dom->render ($this->_context);
+			if (!is_null ($template_file))
+				$this->_document->setFile ($template_file);
+			
+			return $this->_document->render ($this->_context);
 		}
 		catch (OOTemplate_Exception $e)	{
-			echo $e->getMessage ();
-			exit ();
+			if (OOTemplate_Setting::$debug)
+				echo $e->getMessage ();
 		}
 	}
 
 	/**
+	 * DEPRECATED
+	 *
 	 * Is used to fetch an attribute from an object,
 	 * take an exception is $property is not in $object.
 	 *

@@ -1,0 +1,19 @@
+
+
+2009-03-18  Sahid Ferdjaoui  <sahid.ferdjaoui@gmail.com>
+
+	* OOTemplate_Document.php:
+		Add Method setFile and setContents
+		Mod __construct method
+		Modify visibily of tokenezie method
+		Correct a bug in render
+
+	* OOTemplate.php: 
+		Mod __construct method
+		Mod render method
+		Add Methods setDocument, and getDocument
+		Deprecate getatter
+		
+		
+	
+
