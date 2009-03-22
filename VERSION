@@ -1,3 +1,5 @@
+0.8.6: add new tag "include"
+0.8.5: add new filter "tolink"
 0.8.4: many changes, see lib/ChangeLog
 0.8.3: stabilization and corrects bugs
 0.8.2: clean a context class and variable, and resolved a bug in NodeIf

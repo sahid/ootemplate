@@ -91,6 +91,40 @@ class OOTemplate_NodeBlock extends OOTemplate_Node
 	}
 }
 
+class OOTemplate_NodeInclude extends OOTemplate_Node
+{
+	public static function prepare (OOTemplate_Token $token, $dom = null)
+	{
+		return new OOTemplate_NodeInclude ($token);
+	}
+	
+	public function __construct (OOTemplate_Token $token)
+	{
+		$this->_token = $token;
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		try {
+			list (, $arg) = $this->_token->split ();
+			if (strpos ($arg, "'") === false && strpos ($arg, '"') === false)
+				{
+					$o    = new OOTemplate_Variable ($arg);
+					$file = $o->resolve ($context);
+				}
+			else
+				$file = trim ($arg, '\'" ');
+			$result = @file_get_contents (OOTemplate_Setting::generate_inc_path ($file));
+			if ($result === false)
+				throw new OOTemplate_Exception (vsprintf ('failed to open stream: %s, check OOTemplate_Setting::$dir_include', $file));
+		}
+		catch (OOTemplate_Exception $e) {
+			OOTemplate_Debug::show ($e->getMessage ());
+		}
+		return $result;
+	}
+}
+
 
 /**
  * Loops over each item in an array.

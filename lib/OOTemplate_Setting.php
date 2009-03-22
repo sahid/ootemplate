@@ -29,6 +29,8 @@ class OOTemplate_Setting
 	public static $dir_html = '.';
 	public static $suffix   = '.html';
 
+	public static $dir_include = '.';
+
 	public static $string_ifnot_defined = '';
 	public static $debug      = true;
 	
@@ -36,7 +38,17 @@ class OOTemplate_Setting
 	
 	public static function generate_path ($template_file)
 	{
-		return rtrim (self::$dir_html, '/\\ ').'/'.$template_file.self::$suffix;
+		return self::clean_path (self::$dir_html).'/'.$template_file.self::$suffix;
+	}
+
+	public static function generate_inc_path ($inc)
+	{
+		return self::clean_path (self::$dir_include).'/'.$inc;
+	}
+
+	public static function clean_path ($path)
+	{
+		return rtrim ($path, '/\\ ');
 	}
 
 	public static function isUTF8 ($str)
