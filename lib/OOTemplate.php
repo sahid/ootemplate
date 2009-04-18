@@ -69,14 +69,14 @@ class OOTemplate
 	 *
 	 * @var string
 	 */
-	const BEGIN_BLOCK = '{%';
+	const BEGIN_TAG = '{%';
 
 	/**
 	 * The right delimiter used for the template tags.
 	 *
 	 * @var string
 	 */
-	const END_BLOCK = '%}';
+	const END_TAG = '%}';
 
 	/**
 	 * The left delimiter used for the template variables.
@@ -192,20 +192,4 @@ class OOTemplate
 		}
 	}
 
-	/**
-	 * DEPRECATED
-	 *
-	 * Is used to fetch an attribute from an object,
-	 * take an exception is $property is not in $object.
-	 *
-	 * @param string $property, an identifier attribute
-	 * @param mixed $object
-	 */
-	public static function getattr ($property, $object)
-	{
-		if ($object instanceof OOTemplate_Context &&
-				$object->has_key ($property))
-			return $object->get ($property);
-		throw new OOTemplate_Exception ("This property '{$property}' is not defined in object");
-	}
 }

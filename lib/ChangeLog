@@ -1,4 +1,7 @@
+2009-04-18  Sahid Ferdjaoui  <sahid@funraill.org>
 
+	* OOTemplate.php: 
+		Removed getattr method
 
 2009-03-18  Sahid Ferdjaoui  <sahid.ferdjaoui@gmail.com>
 

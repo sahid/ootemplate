@@ -24,19 +24,24 @@
  */
 
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_Debug.php');
-require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_Variable.php');
-require_once ('OOTemplate_Filter.php');
+require_once ('OOTemplate_Node.php');
 
 
-abstract class OOTemplate_Node
+class OOTemplate_NodeVariable extends OOTemplate_Node
 {
-	abstract public function render (OOTemplate_Context $context);
+	public function __construct (OOTemplate_TokenVariable $token)
+	{
+		$this->_token    = $token;
+		
+		@list ($varname, $filters) = explode ('|', $token->contents (), 2);
+		
+		$this->_variable = new OOTemplate_Variable ($varname);
+		if ($filters)
+			$this->_variable = new OOTemplate_Filter ($filters, $this->_variable);
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		return $this->_variable->resolve ($context);
+	}
 }
-
-
-
-
-

@@ -1,3 +1,4 @@
+0.8.7: new gestion of the tags and nodes
 0.8.6: add new tag "include"
 0.8.5: add new filter "tolink"
 0.8.4: many changes, see lib/ChangeLog

@@ -24,41 +24,36 @@
  */
 
 
-
-abstract class OOTemplate_Token
+class OOTemplate_NodeInclude extends OOTemplate_Node
 {
-	protected $_contents;
-	protected $_split;
-	
-	public function __construct ($contents)
+	public static function prepare (OOTemplate_Token $token, $dom = null)
 	{
-		$this->_contents = $contents;
-	}
-
-	public function split ()
-	{
-		if (is_null ($this->_split))
-			{
-				$split = array ();
-				foreach (explode (' ', $this->_contents) as $value)
-					if (!empty ($value))
-						$split[] = $value;
-				$this->_split = $split;
-			}
-		return $this->_split;
+		return new OOTemplate_NodeInclude ($token);
 	}
 	
-	public function contents ()
+	public function __construct (OOTemplate_Token $token)
 	{
-		return $this->_contents;
+		$this->_token = $token;
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		try {
+			list (, $arg) = $this->_token->split ();
+			if (strpos ($arg, "'") === false && strpos ($arg, '"') === false)
+				{
+					$o    = new OOTemplate_Variable ($arg);
+					$file = $o->resolve ($context);
+				}
+			else
+				$file = trim ($arg, '\'" ');
+			$result = @file_get_contents (OOTemplate_Setting::generate_inc_path ($file));
+			if ($result === false)
+				throw new OOTemplate_Exception (vsprintf ('failed to open stream: %s, check OOTemplate_Setting::$dir_include', $file));
+		}
+		catch (OOTemplate_Exception $e) {
+			OOTemplate_Debug::show ($e->getMessage ());
+		}
+		return $result;
 	}
 }
-
-class OOTemplate_TokenText extends OOTemplate_Token 
-{}
-class OOTemplate_TokenTag extends OOTemplate_Token 
-{}
-class OOTemplate_TokenVariable extends OOTemplate_Token 
-{}
-class OOTemplate_TokenComment extends OOTemplate_Token 
-{}

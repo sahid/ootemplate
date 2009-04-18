@@ -24,19 +24,23 @@
  */
 
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_Debug.php');
-require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_Variable.php');
-require_once ('OOTemplate_Filter.php');
-
-
-abstract class OOTemplate_Node
+class OOTemplate_NodeBlock extends OOTemplate_Node
 {
-	abstract public function render (OOTemplate_Context $context);
+	public static function prepare (OOTemplate_Token $token, $dom = null)
+	{
+		return new OOTemplate_NodeBlock ($dom->parse (array ('endblock')));
+	}
+	
+	public function __construct (array $nodes)
+	{
+		$this->_nodes = $nodes;
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		$result = "";
+		foreach ($this->_nodes as $node)
+			$result.= $node->render ($context);
+		return $result;
+	}
 }
-
-
-
-
-

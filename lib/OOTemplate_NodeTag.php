@@ -24,19 +24,39 @@
  */
 
 
-require_once ('OOTemplate_Exception.php');
-require_once ('OOTemplate_Debug.php');
-require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_Variable.php');
-require_once ('OOTemplate_Filter.php');
+require_once ('OOTemplate_Node.php');
 
 
-abstract class OOTemplate_Node
+class OOTemplate_NodeTag extends OOTemplate_Node
 {
-	abstract public function render (OOTemplate_Context $context);
+	protected $_dom;
+	protected $_token;
+	protected $_tag;
+	
+	public function __construct (OOTemplate_Document $dom, OOTemplate_Token $token)
+	{
+		$this->_dom   = $dom;
+		$this->_token = $token;
+		$this->_tag   = $this->_prepare ();
+	}
+
+	protected function _prepare ()
+	{
+		list ($node_type, $name) = $this->_token->split ();
+		$class_name  = 'OOTemplate_Node'.ucfirst ($node_type);
+		$file_name   = $class_name.'.php';
+		$file        = dirname (__FILE__).'/tags/' . $file_name;
+
+		if (!file_exists ($file))
+			throw new OOTemplate_Exception ("Tag not exists: {$name}");
+
+		require_once $file;
+		
+		return call_user_func (array ($class_name, 'prepare'), $this->_token, $this->_dom);
+	}
+	
+	public function render (OOTemplate_Context $context)
+	{
+		return $this->_tag->render ($context);
+	}
 }
-
-
-
-
-

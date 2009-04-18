@@ -25,10 +25,17 @@
 
 
 require_once ('OOTemplate_Exception.php');
+require_once ('OOTemplate_Debug.php');
+
 require_once ('OOTemplate_Setting.php');
 require_once ('OOTemplate_Context.php');
-require_once ('OOTemplate_Node.php');
 require_once ('OOTemplate_Token.php');
+
+require_once ('OOTemplate_Node.php');
+require_once ('OOTemplate_NodeTag.php');
+require_once ('OOTemplate_NodeText.php');
+require_once ('OOTemplate_NodeVariable.php');
+
 
 
 class OOTemplate_Document 
@@ -65,7 +72,8 @@ class OOTemplate_Document
 	public function setContents ($contents)
 	{
 		if (!OOTemplate_Setting::isUTF8 ($this->_contents))
-			throw new OOTemplate_Exception ("Templates can only be constructed from unicode or UTF-8 strings.");
+			throw new OOTemplate_Exception ("Templates can only be constructed ".
+																			"from unicode or UTF-8 strings.");
 		$this->_contents = $contents;
 		
 		$this->tokenize ();
@@ -107,7 +115,7 @@ class OOTemplate_Document
 		$this->_tokens = array ();
 		
 		foreach (preg_split (sprintf ('/(%s.*?%s|%s.*?%s|%s.*?%s)/s', 
-																	OOTemplate::BEGIN_BLOCK, OOTemplate::END_BLOCK,
+																	OOTemplate::BEGIN_TAG, OOTemplate::END_TAG,
 																	OOTemplate::BEGIN_VARIABLE, OOTemplate::END_VARIABLE,
 																	OOTemplate::BEGIN_COMMENT, OOTemplate::END_COMMENT
 																	), $this->_contents, 
@@ -115,9 +123,9 @@ class OOTemplate_Document
 			{
 				switch (substr ($bit, 0, 2))
 					{
-					case OOTemplate::BEGIN_BLOCK:
-						$bit   = trim ($bit, OOTemplate::BEGIN_BLOCK.' '.OOTemplate::END_BLOCK);
-						$token = new OOTemplate_TokenBlock (trim ($bit, '{% %}'));
+					case OOTemplate::BEGIN_TAG:
+						$bit   = trim ($bit, OOTemplate::BEGIN_TAG.' '.OOTemplate::END_TAG);
+						$token = new OOTemplate_TokenTag (trim ($bit, '{% %}'));
 						break;
 					case OOTemplate::BEGIN_VARIABLE:
 						$bit   = trim ($bit, OOTemplate::BEGIN_VARIABLE.' '.OOTemplate::END_VARIABLE);
@@ -145,10 +153,9 @@ class OOTemplate_Document
 		while ($token = @array_shift ($this->_tokens))
 			{
 				$this->_curr_token = $token;
-				
 				switch (get_class ($token))
 					{
-					case 'OOTemplate_TokenBlock':
+					case 'OOTemplate_TokenTag':
 						if (in_array ($token->contents (), $search))
 							return $nodes;
 						
@@ -159,13 +166,9 @@ class OOTemplate_Document
 								$this->_parent = new OOTemplate_Document ();
 								$this->_parent->setFile (trim ($name, '"'));
 								$nodes = $this->_parent->parse ();
-								break;
-							default:
-								$class_name  = 'OOTemplate_Node'.ucfirst ($node_type);
-								$file_name   = $class_name.'.php';
-								
-								$nodes[$name] = call_user_func (array ($class_name, 'prepare'), 
-																								$token, $this);
+								 break;
+							 default:
+								 $nodes[$name] = new OOTemplate_NodeTag ($this, $token);
 							}
 						break;
 					case 'OOTemplate_TokenText':
